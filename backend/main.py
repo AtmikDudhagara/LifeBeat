@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
+
 from app.models.CardioModel import CardioModel
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 import os
 
 app = FastAPI(
@@ -11,9 +12,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# This gets the directory where main.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(BASE_DIR, "models", "cardio_model_pipeline.pkl")
 
+# Build the path to the model relative to main.py
+# If main.py is in 'backend/' and model is in 'backend/app/models/'
+model_path = os.path.join(BASE_DIR, "app", "models", "cardio_model_pipeline.pkl")
+
+# Initialize the model
+predictor = CardioModel(model_path)
 predictor = CardioModel(model_path)
 
 class PatientSchema(BaseModel):
