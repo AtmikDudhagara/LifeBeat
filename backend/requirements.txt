@@ -4,15 +4,9 @@ scikit-learn
 matplotlib
 seaborn
 joblib
-
-fastapi
 fastapi[standard]
-uvicorn[standard]
 pydantic
 python-multipart
 apscheduler
-
-
 jupyter
 kagglehub
-

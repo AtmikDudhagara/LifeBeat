@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/shadcn-ui/sonner";
 import "./globals.css";
 import { AppNavbar } from "@/components/common/app-navbar";
 import Footer from "@/components/common/footer";
@@ -30,6 +31,7 @@ export default function RootLayout({
           <AppNavbar />
           {children}
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

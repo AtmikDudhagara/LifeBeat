@@ -3,6 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/shadcn-ui/button";
 import {
@@ -24,6 +26,8 @@ import {
 } from "@/components/shadcn-ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/shadcn-ui/radio-group";
 import { Separator } from "@/components/shadcn-ui/separator";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const formSchema = z
   .object({
@@ -97,8 +101,29 @@ export default function HealthPredictionForm() {
     },
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form data submitted (numeric values):", data);
+  // Inside your component
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const loadingToast = toast.loading("Analyzing health metrics...");
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/predict`,
+        data,
+      );
+
+      // 1. Save to sessionStorage (Private, stays in this tab)
+      sessionStorage.setItem("last_prediction", JSON.stringify(response.data));
+
+      toast.success("Analysis complete!", { id: loadingToast });
+
+      // 2. Redirect to the result page
+      router.push("/result");
+    } catch (err: any) {
+      toast.error("Failed to connect to server", { id: loadingToast });
+      console.error(err);
+    }
   };
 
   return (
