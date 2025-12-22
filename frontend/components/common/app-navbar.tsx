@@ -79,7 +79,7 @@ export function AppNavbar() {
           ))}
           {/* Mobile Signup Login */}
           <div className="flex w-full flex-col gap-3">
-            <Link href="sign-up" className="w-full">
+            <Link href={"/predict"} className="w-full">
               Predict Now
             </Link>
             <ThemeSwitch

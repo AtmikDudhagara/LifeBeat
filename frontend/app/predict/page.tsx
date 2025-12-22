@@ -4,14 +4,13 @@ import Link from "next/link";
 import { ArrowLeft, Activity, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/shadcn-ui/button";
 import { Badge } from "@/components/shadcn-ui/badge";
-import PredictForm from "./predict-form"; // Adjust path as needed
+import PredictForm from "./predict-form";
 
 export default function PredictPage() {
   return (
-    <>
-      <div className="animate-in fade-in mx-auto max-w-6xl p-4 pt-6 duration-700">
-        {/* Navigation Header - Matches Result Page */}
-        <div className="mt-25 flex items-center justify-between border-b pb-3">
+    <div className="container mx-auto">
+      <div className="animate-in fade-in mx-auto max-w-6xl p-4 pt-17 duration-700">
+        <div className="mt-6 flex items-center justify-between border-b pb-3 md:mt-12">
           <Button variant="ghost" size="sm" asChild className="group gap-2">
             <Link href="/">
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -24,12 +23,12 @@ export default function PredictPage() {
             Gradient Classifier
           </Badge>
         </div>
-
         {/* Main Content Area */}
-        <div className="flex min-h-[calc(100vh-200px)] items-center justify-center py-12">
+        <div className="flex min-h-[calc(100vh-200px)] justify-center py-6 md:items-center md:py-12">
           <div className="w-full max-w-6xl">
-            <PredictForm />
-
+            <div className="flex justify-center">
+              <PredictForm />
+            </div>
             {/* Subtle Disclaimer to match the Result Page footer */}
           </div>
         </div>
@@ -45,6 +44,6 @@ export default function PredictPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
