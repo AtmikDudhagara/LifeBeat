@@ -130,7 +130,7 @@ export default function HealthPredictionForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-card dark:bg-card mx-4 w-full max-w-full space-y-8 rounded-xl p-4 shadow-md sm:mx-auto sm:max-w-md sm:p-8 md:max-w-3xl lg:max-w-5xl dark:border"
+        className="bg-card dark:bg-card w-full max-w-full space-y-8 rounded-xl p-4 shadow-md sm:mx-auto sm:max-w-md sm:p-8 md:max-w-3xl lg:max-w-5xl dark:border"
       >
         <div className="space-y-4">
           <h1 className="text-center text-3xl font-semibold md:text-left">
