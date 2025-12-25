@@ -44,7 +44,8 @@ def read_root():
 
 @app.get("/model-info")
 async def get_modelinfo():
-    with open("app\models\model-info.json", "r") as f:
+    info_path = os.path.join(BASE_DIR, "app", "models", "model-info.json")
+    with open(info_path, "r") as f:
         data = json.load(f)
     return data 
 
