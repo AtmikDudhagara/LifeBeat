@@ -64,11 +64,12 @@ async def get_prediction(payload: PatientSchema):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://cardioml.vercel.app","localhost:3000"],
+    allow_origins=["https://cardioml.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Manual OPTIONS override for Vercel
 @app.options("/{rest_of_path:path}")

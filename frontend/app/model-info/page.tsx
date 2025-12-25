@@ -21,7 +21,7 @@ export default async function ModelInfo() {
   const { data: modelInfo, error } = await getModelInfo();
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 pt-16">
+    <div className="mx-auto mt-10 flex min-h-screen max-w-6xl flex-col px-4 pt-14">
       <div className="flex w-full items-center justify-between border-b pb-3 md:mt-12">
         <Button variant="ghost" size="sm" asChild className="group gap-2">
           <Link href="/">
