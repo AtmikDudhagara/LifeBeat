@@ -1,6 +1,22 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn-ui/card";
+import { Progress } from "@/components/shadcn-ui/progress";
 import { Button } from "@/components/shadcn-ui/button";
-import { ArrowLeft, AlertCircle } from "lucide-react";
+import { ArrowLeft, AlertCircle, InfoIcon } from "lucide-react";
 import Link from "next/link";
+import ConfusionMatrix from "@/components/charts/confusion-matrix";
+import KFold from "@/components/charts/kfold";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/shadcn-ui/tooltip";
 
 async function getModelInfo() {
   try {
@@ -21,7 +37,7 @@ export default async function ModelInfo() {
   const { data: modelInfo, error } = await getModelInfo();
 
   return (
-    <div className="mx-auto mt-10 flex min-h-screen max-w-6xl flex-col px-4 pt-14">
+    <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 pt-20">
       <div className="flex w-full items-center justify-between border-b pb-3 md:mt-12">
         <Button variant="ghost" size="sm" asChild className="group gap-2">
           <Link href="/">
@@ -31,7 +47,7 @@ export default async function ModelInfo() {
         </Button>
       </div>
 
-      <main className="flex flex-1 flex-col items-center justify-center py-20">
+      <main className="flex flex-1 flex-col items-center justify-center pt-20">
         {error ? (
           <div className="bg-card flex flex-col items-center gap-4 rounded-2xl border p-10">
             <AlertCircle className="h-24 w-24 text-yellow-300" />
@@ -41,17 +57,191 @@ export default async function ModelInfo() {
             </p>
           </div>
         ) : (
-          <div className="flex max-w-xl flex-col gap-2 text-center">
-            <h2 className="text-2xl font-semibold">Model Information</h2>
-            <p>Name: {modelInfo.model.name}</p>
-            <p>Library: {modelInfo.model.library}</p>
-            <p>Trained at: {modelInfo.model.trained_at}</p>
-            <p>Estimators: {modelInfo.model.n_estimators}</p>
-            <p>Learning rate: {modelInfo.model.learning_rate}</p>
-            <p>Max depth: {modelInfo.model.max_depth}</p>
+          <div className="w-full space-y-10 pb-10">
+            {/* Header */}
+            <div className="space-y-2 text-center">
+              <h2 className="text-3xl font-bold tracking-tight">
+                {modelInfo.model.name}
+              </h2>
+              <p className="text-muted-foreground">
+                Trained using {modelInfo.model.library}
+              </p>
+            </div>
+
+            {/* Top cards */}
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Model */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Model</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm">
+                  <Row label="Algorithm" value={modelInfo.model.name} />
+                  <Row label="Library" value={modelInfo.model.library} />
+                  <Row
+                    label="Trained At"
+                    value={formatDate(modelInfo.model.trained_at)}
+                  />
+                  <Row
+                    label="Feature Count"
+                    value={modelInfo.features?.names?.length ?? 0}
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Hyperparameters */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Hyperparameters</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm">
+                  <Row
+                    label="Estimators"
+                    value={modelInfo.model.n_estimators}
+                  />
+                  <Row
+                    label="Learning Rate"
+                    value={modelInfo.model.learning_rate}
+                  />
+                  <Row label="Max Depth" value={modelInfo.model.max_depth} />
+                </CardContent>
+              </Card>
+
+              {/* Metrics */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Performance</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <Metric label="Accuracy" value={modelInfo.metrics.accuracy} />
+                  <Metric label="F1 Score" value={modelInfo.metrics.f1} />
+                  <Metric label="ROC AUC" value={modelInfo.metrics.roc_auc} />
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Feature importance */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Top Feature Importance</CardTitle>
+                <CardDescription>
+                  Features contributing most to predictions
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {modelInfo.features.names
+                  .map((name: string, i: number) => ({
+                    name,
+                    value: modelInfo.features.importances[i],
+                  }))
+                  .sort((a: any, b: any) => b.value - a.value)
+                  .map(({ name, value }: { name: string; value: number }) => (
+                    <FeatureBar key={name} name={name} value={value} />
+                  ))}
+              </CardContent>
+            </Card>
+
+            <ConfusionMatrix
+              yTrue={modelInfo.predictions_sample.y_true}
+              yPred={modelInfo.predictions_sample.y_pred}
+            />
+
+            <KFold accuracies={modelInfo.metrics.kfold} />
+
+            {/* Optional video */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Gradient Boosting Explained</CardTitle>
+                <CardDescription>Optional learning resource</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-video overflow-hidden rounded-xl border">
+                  <iframe
+                    className="h-full w-full"
+                    src="https://www.youtube.com/embed/jxuNLH5dXCs?si=6dprQ2HFsrrcA9dB"
+                    title="Gradient Boosting Classifier"
+                    allowFullScreen
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )}
       </main>
     </div>
   );
+}
+
+function Row({ label, value }: { label: string; value: any }) {
+  return (
+    <div className="flex justify-between">
+      <span className="text-muted-foreground">{label}</span>
+      <span>{value}</span>
+    </div>
+  );
+}
+
+function Metric({ label, value }: { label: string; value: number }) {
+  // Now this will find the definition
+  const METRIC_EXPLANATIONS: Record<string, string> = {
+    Accuracy:
+      "The percentage of total predictions that were correct (TP + TN) / Total.",
+    "F1 Score":
+      "The harmonic mean of precision and recall. Best for imbalanced datasets as it accounts for false positives and negatives.",
+    "ROC AUC":
+      "Area Under the Receiver Operating Characteristic Curve. It measures the model's ability to distinguish between classes (1.0 is perfect).",
+    Precision: "Of all predicted positives, how many were actually positive?",
+    Recall:
+      "Of all actual positives, how many did the model identify correctly?",
+  };
+  const explanation =
+    METRIC_EXPLANATIONS[label] || "Performance metric for this model.";
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between text-sm">
+        <div className="text-muted-foreground flex items-center gap-1.5 font-medium">
+          <span>{label}</span>
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="cursor-help opacity-70 transition-opacity hover:opacity-100">
+                  <InfoIcon className="h-3.5 w-3.5" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent
+                side="top"
+                className="bg-popover text-popover-foreground max-w-[200px] border p-2 text-xs leading-relaxed shadow-md"
+              >
+                {explanation}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+        <span className="font-mono font-semibold">
+          {(value * 100).toFixed(1)}%
+        </span>
+      </div>
+      <Progress value={value * 100} className="h-2" />
+    </div>
+  );
+}
+
+function FeatureBar({ name, value }: { name: string; value: number }) {
+  return (
+    <div className="space-y-1">
+      <div className="flex justify-between text-sm">
+        <span>{name}</span>
+        <span>{(value * 100).toFixed(1)}%</span>
+      </div>
+      <Progress value={value * 100} />
+    </div>
+  );
+}
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
 }
