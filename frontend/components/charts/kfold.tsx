@@ -32,11 +32,11 @@ const KFold: React.FC<KFoldProps> = ({ accuracies }) => {
       </CardHeader>
 
       <CardContent>
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 place-items-center gap-4 md:grid-cols-2  lg:grid-cols-5">
           {accuracies.map((acc, index) => (
             <div
               key={index}
-              className="bg-primary/85 text-white flex flex-col items-center justify-center rounded-lg border p-4 shadow"
+              className="bg-primary/85 flex w-full max-w-[180px] flex-col items-center justify-center rounded-lg border p-4 text-white shadow"
             >
               <span className="font-medium">Fold {index + 1}</span>
               <span className="mt-2 text-lg font-bold">

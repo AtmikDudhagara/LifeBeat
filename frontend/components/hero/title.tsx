@@ -43,7 +43,7 @@ export default function Title() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/minfo">Learn More</Link>
+                <Link href="/model-info">Learn More</Link>
               </Button>
             </div>
           </div>

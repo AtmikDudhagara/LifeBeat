@@ -5,6 +5,7 @@ import { Toaster } from "@/components/shadcn-ui/sonner";
 import "./globals.css";
 import { AppNavbar } from "@/components/common/app-navbar";
 import Footer from "@/components/common/footer";
+import LenisProvider from "@/components/providers/lenis-provider";
 
 export const metadata: Metadata = {
   title: "CardioML",
@@ -28,10 +29,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppNavbar />
-          {children}
-          <Footer />
-          <Toaster />
+          <LenisProvider>
+            <AppNavbar />
+            {children}
+            <Footer />
+            <Toaster />
+          </LenisProvider>
         </ThemeProvider>
       </body>
     </html>

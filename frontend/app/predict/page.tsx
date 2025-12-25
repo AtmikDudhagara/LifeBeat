@@ -10,7 +10,7 @@ export default function PredictPage() {
   return (
 
     <div className="bg-background flex min-h-screen flex-col">
-      <div className="animate-in fade-in mx-auto w-full max-w-6xl flex-1 p-4 pt-17 duration-700">
+      <div className="animate-in fade-in duration-700 mx-auto w-full max-w-6xl flex-1 p-4 pt-17 ">
        
         <div className="mt-6 flex items-center justify-between border-b pb-3 md:mt-12">
           <Button variant="ghost" size="sm" asChild className="group gap-2">

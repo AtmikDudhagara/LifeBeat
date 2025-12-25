@@ -37,8 +37,8 @@ export default async function ModelInfo() {
   const { data: modelInfo, error } = await getModelInfo();
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 pt-20">
-      <div className="flex w-full items-center justify-between border-b pb-3 md:mt-12">
+    <div className="animate-in fade-in mx-auto flex min-h-screen max-w-6xl flex-col px-4 pt-17 duration-700">
+      <div className="mt-12 flex w-full items-center justify-between border-b pb-3">
         <Button variant="ghost" size="sm" asChild className="group gap-2">
           <Link href="/">
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -46,8 +46,7 @@ export default async function ModelInfo() {
           </Link>
         </Button>
       </div>
-
-      <main className="flex flex-1 flex-col items-center justify-center pt-20">
+      <main className="flex flex-1 flex-col items-center pt-10">
         {error ? (
           <div className="bg-card flex flex-col items-center gap-4 rounded-2xl border p-10">
             <AlertCircle className="h-24 w-24 text-yellow-300" />
@@ -59,11 +58,12 @@ export default async function ModelInfo() {
         ) : (
           <div className="w-full space-y-10 pb-10">
             {/* Header */}
-            <div className="space-y-2 text-center">
-              <h2 className="text-3xl font-bold tracking-tight">
+            {/* Header */}
+            <div className="space-y-1 text-center sm:space-y-2">
+              <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
                 {modelInfo.model.name}
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-sm sm:text-base">
                 Trained using {modelInfo.model.library}
               </p>
             </div>
@@ -182,7 +182,6 @@ function Row({ label, value }: { label: string; value: any }) {
 }
 
 function Metric({ label, value }: { label: string; value: number }) {
-  // Now this will find the definition
   const METRIC_EXPLANATIONS: Record<string, string> = {
     Accuracy:
       "The percentage of total predictions that were correct (TP + TN) / Total.",

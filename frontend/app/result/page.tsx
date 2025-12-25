@@ -16,7 +16,7 @@ export default function ResultPage() {
   if (!prediction) return null;
 
   return (
-    <div className="min-h-screen pt-22">
+    <div className="animate-in fade-in min-h-screen pt-22 duration-700">
       <PredictionResult
         prediction={prediction}
         onReset={() => router.push("/")}

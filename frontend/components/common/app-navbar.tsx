@@ -18,7 +18,7 @@ import { Button } from "../shadcn-ui/button";
 
 export function AppNavbar() {
   const navItems = [
-    { name: "Fun Facts", link: "/facts" },
+    { name: "Data Insights", link: "/data-insights" },
     {
       name: "Model Info",
       link: "/model-info",

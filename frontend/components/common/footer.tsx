@@ -22,7 +22,8 @@ function Footer() {
             </div>
             <p className="text-sm leading-relaxed">
               © 2025 CardioML <br />
-              All rights reserved
+              All rights reserved <br />
+              Not medical advice, use responsibly
             </p>
           </div>
 
