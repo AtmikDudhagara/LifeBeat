@@ -8,10 +8,8 @@ import PredictForm from "./predict-form";
 
 export default function PredictPage() {
   return (
-
     <div className="bg-background flex min-h-screen flex-col">
-      <div className="animate-in fade-in duration-700 mx-auto w-full max-w-6xl flex-1 p-4 pt-17 ">
-       
+      <div className="animate-in fade-in mx-auto w-full max-w-6xl flex-1 p-4 pt-17 duration-700">
         <div className="mt-6 flex items-center justify-between border-b pb-3 md:mt-12">
           <Button variant="ghost" size="sm" asChild className="group gap-2">
             <Link href="/">
@@ -30,6 +28,15 @@ export default function PredictPage() {
         </div>
 
         <main className="flex flex-col items-center justify-center py-10 md:py-16">
+          <div className="space-y-2 pb-5 text-center">
+            <h2 className="text-xl font-semibold tracking-tight sm:text-3xl">
+              CVD Prediction Form
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
+              Enter your health details to assess cardiovascular disease risk
+            </p>
+          </div>
+
           <div className="w-full">
             <PredictForm />
           </div>
@@ -47,7 +54,7 @@ export default function PredictPage() {
             .
           </p>
         </main>
-        
+
         <div className="mt-auto border-t py-6">
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 md:flex-row">
             <p className="text-muted-foreground flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase">
@@ -60,8 +67,6 @@ export default function PredictPage() {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }

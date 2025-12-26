@@ -58,13 +58,15 @@ export default async function ModelInfo() {
         ) : (
           <div className="w-full space-y-10 pb-10">
             {/* Header */}
-            {/* Header */}
             <div className="space-y-1 text-center sm:space-y-2">
               <h2 className="text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
                 {modelInfo.model.name}
               </h2>
-              <p className="text-muted-foreground text-sm sm:text-base">
-                Trained using {modelInfo.model.library}
+              <p className="text-muted-foreground text-sm">
+                this model includes the following hyperparameters and evaluation
+                metrics.
+                <br />
+                Trained using {modelInfo.model.library},
               </p>
             </div>
 
@@ -152,7 +154,9 @@ export default async function ModelInfo() {
             <Card>
               <CardHeader>
                 <CardTitle>Gradient Boosting Explained</CardTitle>
-                <CardDescription>Optional learning resource</CardDescription>
+                <CardDescription>
+                  A cool video where I learned Gradient Boosting Classification.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="aspect-video overflow-hidden rounded-xl border">

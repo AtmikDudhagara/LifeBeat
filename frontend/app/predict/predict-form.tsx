@@ -135,7 +135,7 @@ export default function HealthPredictionForm() {
           <h1 className="text-center text-3xl font-semibold md:text-left">
             Predict CVD
           </h1>
-          <h2 className="text-xl font-semibold">Simple Information</h2>
+          <h2 className="text-xl font-semibold">Personal Information</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {/* Age */}
             <FormField

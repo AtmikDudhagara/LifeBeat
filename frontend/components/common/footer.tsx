@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { Separator } from "../shadcn-ui/separator";
 import Logo from "./logo";
 
 import { Montserrat } from "next/font/google";
+import { Copyright } from "lucide-react";
 
 const mon = Montserrat({
   subsets: ["cyrillic"],
@@ -9,6 +11,30 @@ const mon = Montserrat({
 });
 
 function Footer() {
+  function getYearFromDate(input: Date | string): number | null {
+    try {
+      let date: Date;
+
+      // If input is a string, try to parse it
+      if (typeof input === "string") {
+        date = new Date(input);
+      } else {
+        date = input;
+      }
+
+      // Validate if the date is valid
+      if (isNaN(date.getTime())) {
+        console.error("Invalid date provided.");
+        return null;
+      }
+
+      return date.getFullYear();
+    } catch (error) {
+      console.error("Error extracting year:", error);
+      return null;
+    }
+  }
+
   return (
     <footer className="relative mt-auto overflow-hidden">
       <Separator />
@@ -21,7 +47,7 @@ function Footer() {
               <Logo />
             </div>
             <p className="text-sm leading-relaxed">
-              © 2025 CardioML <br />
+              © {getYearFromDate(new Date())} CardioML <br />
               All rights reserved <br />
               Not medical advice, use responsibly
             </p>
@@ -31,7 +57,7 @@ function Footer() {
           <div className="grid grid-cols-2 gap-10 text-sm md:grid-cols-3">
             {/* Column 1 */}
             <div className="[&>a:hover]:text-primary flex flex-col items-start gap-2">
-              <a href="#">Disclaimer</a>
+              <Link href="/disclaimer">Disclaimer</Link>
             </div>
             {/* Column 2 */}
             <div className="[&>a:hover]:text-primary flex flex-col gap-2">
@@ -45,7 +71,7 @@ function Footer() {
               <a href="https://in.linkedin.com/in/keval-kansagra-5b77ab286">
                 LinkedIn
               </a>
-              <a href="https://github.com/Keval144/CardioML">GitHub</a>
+              <a href="https://github.com/Keval144">GitHub</a>
             </div>
           </div>
         </div>

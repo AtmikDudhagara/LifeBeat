@@ -14,7 +14,16 @@ export default function DataInsight() {
         </Button>
       </div>
 
-      <main className="flex flex-1 flex-col items-center pt-20">hello</main>
+      <main className="flex flex-1 flex-col items-center pt-10">
+        <div className="space-y-2 text-center">
+          <h2 className="text-xl font-semibold tracking-tight sm:text-3xl">
+            Data Insights
+          </h2>
+          <p className="text-muted-foreground">
+            Key trends, patterns, and observations extracted from the data
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

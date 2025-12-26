@@ -1,6 +1,7 @@
 import HeartBeat from "@/components/hero/heartbeat";
 import Title from "@/components/hero/title";
 import Working from "@/components/hero/working";
+import { ShieldCheck } from "lucide-react";
 
 export default function Home() {
   return (
@@ -9,7 +10,8 @@ export default function Home() {
       <HeartBeat />
       <Working />
       <div className="text-muted-foreground mx-auto flex max-w-5xl items-center justify-center p-8 text-center text-[9px] font-bold tracking-[0.2em] uppercase">
-        Secure • Encrypted • Research Purpose Only
+        <ShieldCheck className="size-4 text-blue-500 pr-1" /> Secure • Encrypted •
+        Research Purpose Only
       </div>
     </>
   );
