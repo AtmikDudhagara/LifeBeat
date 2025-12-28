@@ -49,6 +49,13 @@ async def get_modelinfo():
         data = json.load(f)
     return data 
 
+@app.get("/data-insight")
+async def get_datainsight():
+    insight_path = os.path.join(BASE_DIR, "app","models","data-insight.json")
+    with open(insight_path,"r") as f:
+        data = json.load(f)
+    return data
+
 
 @app.post("/predict")
 async def get_prediction(payload: PatientSchema):
