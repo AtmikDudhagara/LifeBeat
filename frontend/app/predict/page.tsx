@@ -53,6 +53,10 @@ export default function PredictPage() {
             </Link>
             .
           </p>
+          <p className="text-muted-foreground mt-2 text-center text-[11px] font-bold">
+            Due to inactivity, the server may go to sleep. Please wait about 1
+            minute if the page is buffering
+          </p>
         </main>
 
         <div className="mt-auto border-t py-6">

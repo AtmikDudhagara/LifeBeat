@@ -1,5 +1,5 @@
 import { Button } from "@/components/shadcn-ui/button";
-import { ArrowLeft } from "lucide-react";
+import { AlertCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -41,17 +41,13 @@ export default async function DataInsight() {
   if (error || !data) {
     return (
       <div className="bg-background flex min-h-screen items-center justify-center p-6">
-        <Card className="w-full max-w-lg">
-          <CardContent>
-            <h3 className="text-foreground text-lg font-semibold">
-              Can't load insights
-            </h3>
-            <p className="text-muted-foreground mt-2">
-              There was a problem fetching dataset insights. Please try again
-              later.
-            </p>
-          </CardContent>
-        </Card>
+        <div className="bg-card flex flex-col items-center gap-4 rounded-2xl border p-10">
+          <AlertCircle className="h-24 w-24 text-yellow-300" />
+          <h2 className="text-3xl font-bold">Failed to fetch data insight</h2>
+          <p className="text-muted-foreground text-center text-sm">
+            Please try Again Later
+          </p>
+        </div>
       </div>
     );
   }
