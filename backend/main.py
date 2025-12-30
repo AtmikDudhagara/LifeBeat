@@ -35,7 +35,6 @@ app = FastAPI(
 # --- RATE LIMITER SETUP ---
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
-app.add_middleware(SlowAPIMiddleware)
 
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(request: Request, exc):
@@ -75,12 +74,14 @@ class PatientSchema(BaseModel):
 
 # --- ROUTES ---
 
-#For Uptime bot
 @app.head("/")
 @limiter.limit("10/minute")
-def read_root(response:Response):
-    response.status_code = 200
-    return 
+def read_root(request: Request):
+    return
+
+@app.get("/")
+def root():
+    return {"status": "ok"}
 
 @app.get("/model-info")
 @limiter.limit("5/minute")
@@ -130,6 +131,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.add_middleware(SlowAPIMiddleware)
 # Manual OPTIONS override for Vercel/CORS preflight
 @app.options("/{rest_of_path:path}")
 async def preflight_handler(rest_of_path: str, response: Response):
