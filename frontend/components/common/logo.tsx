@@ -10,7 +10,7 @@ function Logo() {
   return (
     <>
       <Image src="/CardioML.png" alt="logo" width={30} height={30} />
-      <span className={`text-2xl ${mon.className}`}>CardioML</span>
+      <span className={`text-2xl ${mon.className}`}>LifeBeat</span>
     </>
   );
 }
