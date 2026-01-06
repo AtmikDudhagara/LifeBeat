@@ -85,7 +85,7 @@ def root():
 
 @app.get("/model-info")
 @limiter.limit("5/minute")
-async def get_modelinfo(request: Request, api_key: str = Depends(validate_api_key)):
+async def get_modelinfo(request: Request):
     info_path = os.path.join(BASE_DIR, "app", "models", "model-info.json")
     try:
         with open(info_path, "r") as f:
@@ -96,7 +96,7 @@ async def get_modelinfo(request: Request, api_key: str = Depends(validate_api_ke
 
 @app.get("/data-insight")
 @limiter.limit("5/minute")
-async def get_datainsight(request: Request, api_key: str = Depends(validate_api_key)):
+async def get_datainsight(request: Request):
     insight_path = os.path.join(BASE_DIR, "app","models","data-insight.json")
     try:
         with open(insight_path,"r") as f:
@@ -109,8 +109,7 @@ async def get_datainsight(request: Request, api_key: str = Depends(validate_api_
 @limiter.limit("10/minute")
 async def get_prediction(
     request: Request, 
-    payload: PatientSchema, 
-    api_key: str = Depends(validate_api_key)
+    payload: PatientSchema
 ):
     data_dict = payload.model_dump()
     result, chance = predictor.predict(data_dict)
