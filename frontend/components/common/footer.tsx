@@ -61,17 +61,17 @@ function Footer() {
             </div>
             {/* Column 2 */}
             <div className="[&>a:hover]:text-primary flex flex-col gap-2">
-              <a href="https://github.com/Keval144/CardioML">Open Source</a>
-              <a href="mailto:kevalm144@gmail.com">Contact</a>
+              <a href="https://github.com/AtmikDudhagara/LifeBeat">Open Source</a>
+              <a href="mailto:atmikdudhagara1980@gmail.com">Contact</a>
             </div>
 
             {/* Column 3 */}
             <div className="[&>a:hover]:text-primary flex flex-col gap-2">
-              <a href="https://x.com/kansagra_keval">Twitter</a>
-              <a href="https://in.linkedin.com/in/keval-kansagra-5b77ab286">
+              {/* <a href="https://x.com/kansagra_keval">Twitter</a> */}
+              {/* <a href="https://in.linkedin.com/in/keval-kansagra-5b77ab286">
                 LinkedIn
-              </a>
-              <a href="https://github.com/Keval144">GitHub</a>
+              </a> */}
+              <a href="https://github.com/AtmikDudhagara/">GitHub</a>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ function Footer() {
         <h1
           className={`bg-linear-to-t from-zinc-900/10 to-zinc-800/0 bg-clip-text text-[5rem] leading-none font-extrabold tracking-tight whitespace-nowrap text-transparent opacity-90 blur-[0.5] select-none sm:text-[7rem] md:text-[9rem] lg:text-[11rem] xl:text-[14rem] dark:from-slate-200/20 dark:to-slate-50/5 ${mon.className}`}
         >
-          CardioML
+          Life Beat
         </h1>
       </div>
     </footer>
