@@ -14,11 +14,12 @@ export default function HeartBeat() {
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
+          {/* Red scanning gradient */}
           <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="50%" stopColor="white" stopOpacity="0.1" />
-            <stop offset="90%" stopColor="white" stopOpacity="1" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
+            <stop offset="0%" stopColor="red" stopOpacity="0" />
+            <stop offset="50%" stopColor="red" stopOpacity="0.15" />
+            <stop offset="90%" stopColor="red" stopOpacity="1" />
+            <stop offset="100%" stopColor="red" stopOpacity="0" />
           </linearGradient>
 
           <mask id="scanMask">
@@ -38,27 +39,26 @@ export default function HeartBeat() {
           </mask>
         </defs>
 
-        {/* Ghost Path - Uses your theme's muted foreground at low opacity */}
+        {/* Ghost Path */}
         <path
           d={pathData}
           fill="none"
-          stroke="var(--muted-foreground)"
+          stroke="red"
           strokeWidth="1"
           opacity="0.15"
         />
 
-        {/* Active Pulse - Uses your theme's Primary OKLCH color */}
+        {/* Active Pulse */}
         <path
           d={pathData}
           fill="none"
-          stroke="var(--primary)"
+          stroke="red"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
           mask="url(#scanMask)"
           style={{
-            // Dynamic glow based on your primary color
-            filter: "drop-shadow(0 0 4px var(--primary))",
+            filter: "drop-shadow(0 0 6px red)",
           }}
         />
       </svg>

@@ -10,7 +10,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "CardioML",
+  title: "Life Beat",
   description: "",
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="apple-mobile-web-app-title" content="CardioML" />
+        <meta name="apple-mobile-web-app-title" content="LifeBeat" />
       </head>
       <body className={`antialiased`}>
         <ThemeProvider

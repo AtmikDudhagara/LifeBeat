@@ -1,79 +1,105 @@
-import { Activity, ShieldCheck, BarChart3, Clock, Percent } from "lucide-react";
+import React from "react";
+import {
+  Activity,
+  ShieldCheck,
+  BarChart3,
+  Clock,
+  Percent,
+} from "lucide-react";
+
 import { Badge } from "@/components/shadcn-ui/badge";
-import Link from "next/link";
 import { Button } from "@/components/shadcn-ui/button";
+import Link from "next/link";
 
 export default function Title() {
   return (
-    <section className="relative flex min-h-[85vh] items-center justify-center px-4 pt-25 sm:px-6 md:pt-24 lg:px-8">
-      {/* Optional: Background decorative elements */}
+    <section className="relative flex min-h-[85vh] items-center justify-center px-4 pt-24 sm:px-6 lg:px-8">
+
+      {/* Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-40 right-0 h-80 w-80 rounded-full bg-blue-100 opacity-30 blur-3xl dark:bg-blue-900/20" />
-        <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-orange-100 opacity-20 blur-3xl dark:bg-orange-900/10" />
+        <div className="absolute -top-40 right-0 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl dark:bg-blue-900/20" />
+        <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-orange-100/30 blur-3xl dark:bg-orange-900/10" />
       </div>
 
-      <div className="animate-in fade-in mx-auto w-full max-w-6xl duration-700">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <Badge
-              variant="outline"
-              className="group mb-4 border-blue-200 bg-blue-50/50 px-3 py-1 text-slate-700 transition-all hover:border-blue-500 hover:bg-blue-50 hover:text-blue-600 hover:shadow-sm dark:border-blue-800 dark:bg-blue-950/30 dark:text-slate-300 dark:hover:border-blue-400 dark:hover:bg-blue-950/50 dark:hover:text-blue-400"
-            >
-              <Activity className="mr-2 h-3 w-3 text-blue-600 transition-transform group-hover:scale-110 dark:text-blue-400" />
-              <span className="font-medium">Early Warning System</span>
-            </Badge>
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="flex flex-col items-center text-center lg:text-left">
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Cardiovascular{" "}
-              <span className="block text-blue-600 dark:text-blue-400">
-                Risk Assessment
-              </span>
-            </h1>
+          {/* Badge */}
+          <Badge
+            variant="outline"
+            className="mb-4 border-blue-200 bg-blue-50/50 px-3 py-1 text-slate-700 dark:border-blue-800 dark:bg-blue-950/30 dark:text-slate-300"
+          >
+            <Activity className="mr-2 h-3 w-3 text-blue-600 dark:text-blue-400" />
+            Early Warning System
+          </Badge>
 
-            <p className="text-muted-foreground mt-5 max-w-md text-lg leading-relaxed">
-              Our AI model analyzes clinical variables to predict potential
-              heart risks with precision.
-            </p>
+          {/* Heading */}
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            Cardiovascular
+            <span className="block text-blue-600 dark:text-blue-400">
+              Risk Assessment
+            </span>
+          </h1>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button asChild size="lg" className="gap-2">
-                <Link href="/predict">
-                  <Activity className="h-4 w-4" />
-                  Start Assessment
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/model-info">Learn More</Link>
-              </Button>
-            </div>
+          {/* Description */}
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            Our AI model analyzes clinical variables to predict potential
+            heart risks with precision.
+          </p>
+
+          {/* Buttons */}
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Button asChild size="lg" className="gap-2">
+              <Link href="/predict">
+                <Activity className="h-4 w-4" />
+                Start Assessment
+              </Link>
+            </Button>
+
+            <Button asChild variant="outline" size="lg">
+              <Link href="/model-info">Learn More</Link>
+            </Button>
           </div>
 
-          {/* RIGHT FEATURES */}
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card
+          {/* Metrics – 2x2 Cards */}
+          <div className="mt-14 grid w-full max-w-4xl grid-cols-1 gap-6 text-left sm:grid-cols-2">
+
+            <Stat
               icon={<BarChart3 className="h-5 w-5 text-blue-600" />}
-              title="73.4% Accuracy"
-              desc="Trained on 70,000+ clinical patient records with cross-validation."
-              accent="blue"
+              title="Accuracy"
+              value="73.4%"
+              valueColor="text-blue-600"
+              desc="Trained on 70,000+ clinical patient records with cross-validation"
+              accent="border-blue-500/60"
             />
-            <Card
+
+            <Stat
               icon={<Clock className="h-5 w-5 text-orange-500" />}
-              title="Instant Results"
-              desc="Real-time gradient boosting classification in under 5 seconds."
-              accent="orange"
+              title="Speed"
+              value="< 5 sec"
+              valueColor="text-orange-500"
+              desc="Real-time gradient boosting prediction"
+              accent="border-orange-500/60"
             />
-            <Card
+
+            <Stat
               icon={<ShieldCheck className="h-5 w-5 text-emerald-600" />}
-              title="Secure & Private"
-              desc="End-to-end encrypted processing with anonymous data"
-              accent="emerald"
+              title="Security"
+              value="Encrypted"
+              valueColor="text-emerald-600"
+              desc="End-to-end encrypted & anonymous data processing"
+              accent="border-emerald-500/60"
             />
-            <Card
+
+            <Stat
               icon={<Percent className="h-5 w-5 text-purple-600" />}
-              title="Confidence Scores"
-              desc="Predictions include probability-based confidence levels."
-              accent="purple"
+              title="Confidence"
+              value="Probabilistic"
+              valueColor="text-purple-600"
+              desc="Predictions include confidence probability scores"
+              accent="border-purple-500/60"
             />
+
           </div>
         </div>
       </div>
@@ -81,40 +107,36 @@ export default function Title() {
   );
 }
 
-interface CardProps {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-  accent?: "blue" | "orange" | "emerald" | "purple";
-  className?: string;
-}
-
-function Card({
+/* ---------- Stat Card ---------- */
+function Stat({
   icon,
   title,
+  value,
+  valueColor,
   desc,
-  accent = "blue",
-  className = "",
-}: CardProps) {
-  const accentColors = {
-    blue: "hover:border-blue-500 hover:shadow-blue-500/10",
-    orange: "hover:border-orange-500 hover:shadow-orange-500/10",
-    emerald: "hover:border-emerald-500 hover:shadow-emerald-500/10",
-    purple: "hover:border-purple-500 hover:shadow-purple-500/10",
-  };
-
+  accent,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  valueColor: string;
+  desc: string;
+  accent: string;
+}) {
   return (
     <div
-      className={`group bg-card relative overflow-hidden rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${accentColors[accent]} ${className}`}
+      className={`relative rounded-xl border bg-card p-6 shadow-sm transition hover:shadow-md border-l-4 ${accent}`}
     >
-      {/* Accent border top */}
-      <div className={`absolute top-0 left-0 h-1 w-full bg-linear-to-r`} />
-
-      <div className="bg-background/50 mb-4 w-fit rounded-lg p-2.5 transition-transform group-hover:scale-110">
+      <div className="flex items-center gap-3 font-semibold">
         {icon}
+        {title}
       </div>
-      <h3 className="text-base font-semibold tracking-tight">{title}</h3>
-      <p className="text-muted-foreground mt-2 text-sm leading-relaxed opacity-90">
+
+      <div className={`mt-2 text-2xl font-bold ${valueColor}`}>
+        {value}
+      </div>
+
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
         {desc}
       </p>
     </div>

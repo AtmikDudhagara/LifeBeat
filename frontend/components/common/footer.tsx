@@ -47,7 +47,7 @@ function Footer() {
               <Logo />
             </div>
             <p className="text-sm leading-relaxed">
-              © {getYearFromDate(new Date())} CardioML <br />
+              © {getYearFromDate(new Date())} LifeBeat <br />
               All rights reserved <br />
               Not medical advice, use responsibly
             </p>

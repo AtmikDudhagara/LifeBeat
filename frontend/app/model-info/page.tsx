@@ -157,25 +157,7 @@ export default async function ModelInfo() {
 
             <KFold accuracies={modelInfo.metrics.kfold} />
 
-            {/* Optional video */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Gradient Boosting Explained</CardTitle>
-                <CardDescription>
-                  A cool video where I learned Gradient Boosting Classification.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="aspect-video overflow-hidden rounded-xl border">
-                  <iframe
-                    className="h-full w-full"
-                    src="https://www.youtube.com/embed/jxuNLH5dXCs?si=6dprQ2HFsrrcA9dB"
-                    title="Gradient Boosting Classifier"
-                    allowFullScreen
-                  />
-                </div>
-              </CardContent>
-            </Card>
+
           </div>
         )}
       </main>
