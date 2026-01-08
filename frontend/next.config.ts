@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://cardioml-9qxc.onrender.com/:path*",
+        destination: "https://lifebeat.onrender.com/:path*",
       },
       {
         source: "/api/:path*",
