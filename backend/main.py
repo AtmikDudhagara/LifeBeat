@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Security Settings
 API_KEY_NAME = "x-api-key"
 API_KEY_SECRET = os.getenv("API_KEY_SECRET", "fallback-secret-for-dev")
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "https://cardioml.vercel.app,http://localhost:3000").split(",")
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "https://lifebeat.vercel.app,http://localhost:3000").split(",")
 
 # Initialize FastAPI
 app = FastAPI(
