@@ -42,7 +42,7 @@ export function AppNavbar() {
           <div className="flex items-center gap-2">
             <Button
               asChild
-              className="text-primary-foreground h-8 rounded-2xl px-3 text-sm font-medium"
+              className="text-primary-foreground h-8 rounded-2xl px-3 text-sm font-medium "
             >
               <Link href="/predict" className="group flex items-center gap-1">
                 Predict Now
